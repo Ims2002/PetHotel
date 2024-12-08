@@ -1,0 +1,56 @@
+Páginas:
+
+LogIn - LogOut - Register
+
+Página 1
+    - Presentacion, página principal explicando y mostrando las funcionalidades de la página
+
+Página 2
+    - Listado dónde se mostrarán los productos de la tienda (Cards de boostrap)
+
+Página 3
+    - Carrito donde se mostrarán los elementos almacenados y el precio total de los elementos del carrito
+
+Página 4
+    - Apartado de reservas en la que se enviará correo al usuario confirmando la reserva
+
+Página 5
+    - Brainstorming Incoming (¿detector de raza con una Red Neuronal Convolucional?)
+    - Perfil del usuario, si se hace el perfil el carrito se pondria en un aside en la tienda
+
+
+Base de Datos:
+    -Producto:
+        * id
+        * nombre
+        * descripcion
+        * precio
+        * imagen
+
+    -Usuarios:
+        * id
+        * nombre
+        * mail
+        * contraseña
+
+    -Carrito:
+        * id
+        * nombreProducto
+        * imagen
+        * precio
+
+    -Reservas:
+        * id
+        * fechaEntrada
+        * fechaSalida
+        * razaperro
+        * edad
+        * email
+        * telefono
+
+    - TODO los botones ya añaden elementos a la base de datos,
+        falta recuperar los datos del carrito y listarlos en un carrito
+        tambien queda pendiente el cálculo del precio total y el diseño del carrito,
+        además se ha de mover la funcionalidad de 'procesarCarrito.php' al Manager
+        y comprobar también si se necesita el action del FORM o no.
+
