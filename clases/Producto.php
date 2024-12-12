@@ -61,13 +61,13 @@ class Producto
                 <h1>{$this->nombre}</h1>
                 <p class='price'><s>" . number_format($this->precio, 2) . "€</s></p>
                 <h1 style='color: red'>" . number_format($this->precio * 0.7, 2) . "€</h1>
-                <p>{$this->descripcion}</p>
+                <h3>{$this->descripcion}</h3>
                 <form action='../controladores/procesarCarrito.php' method='POST'>
                     <input type='hidden' name='producto_id' value='{$this->id}'>
                     <input type='hidden' name='producto_nombre' value='{$this->nombre}'>
                     <input type='hidden' name='producto_precio' value='{$this->precio}'>
                     <input type='hidden' name='producto_imagen' value='{$this->imagen}'>
-                    <p><button type='submit'>Add to Cart</button></p>
+                    <p><button type='submit'>Añadir al carrito</button></p>
                 </form>
             </div>
         ";

@@ -19,15 +19,15 @@
 
     #formularioReservas {
         margin: auto;
-        margin-bottom: 150px;
-        margin-top: 150px;
+        margin-bottom: 50px;
+        margin-top: 50px;
         padding: 5px;
         text-align: center;
         display: flex;
         flex-direction: column;
         background-color: bisque;
         border: 5px solid black;
-        max-height: 30%;
+        max-height: fit-content;
         max-width: 40%;
         border-radius: 5%;
         font-family: "Comic Sans MS",cursive;

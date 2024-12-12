@@ -115,6 +115,20 @@ class ConexionDB
     }
 
 
+    public function eliminarC($consulta, $parametros = [])
+    {
+        // Preparar la consulta
+        $select = $this->pdo->prepare($consulta);
+
+        // Ejecutar la consulta con los parámetros si existen
+        if ($select->execute($parametros)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
     public function actualizarC($consulta, $params = [])
     {
         // Update
@@ -148,6 +162,13 @@ class ConexionDB
         return false;
     }
 
+    /**
+     * @return PDO
+     */
+    public function getPdo()
+    {
+        return $this->pdo;
+    }
 
 
 }

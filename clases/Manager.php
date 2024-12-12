@@ -1,6 +1,7 @@
 <?php
 
 require_once ('C:\xampp\htdocs\PetHotel\clases\ConexionDB.php');
+require_once ('C:\xampp\htdocs\PetHotel\clases\Carrito.php');
 require_once ('C:\xampp\htdocs\PetHotel\clases\Mailer.php');
 require_once ('C:\xampp\htdocs\PetHotel\clases\Usuario.php');
 require_once('C:\xampp\htdocs\PetHotel\clases\Producto.php');
@@ -150,7 +151,6 @@ require_once('C:\xampp\htdocs\PetHotel\clases\Producto.php');
 
         public function addCarrito()
         {
-
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 // Obtener datos del formulario
                 $productoId = $_POST['producto_id'];
@@ -158,43 +158,74 @@ require_once('C:\xampp\htdocs\PetHotel\clases\Producto.php');
                 $productoPrecio = $_POST['producto_precio'];
                 $productoImagen = $_POST['producto_imagen'];
 
-                $item = new Carrito($productoNombre, $productoPrecio, $productoImagen);
-
-                var_dump($item);
-
                 // Crear una instancia de la clase ConexionDB
                 $db = new ConexionDB();
 
                 // Verificar si el producto ya está en el carrito
-                $consulta = "SELECT * FROM carrito WHERE id_producto = ?";
-                $carrito = $db->consultarC($consulta);
+                $consulta = "SELECT * FROM carrito WHERE id = ?";
+                $carrito = $db->consultarC($consulta, [$productoId]);
 
                 if ($carrito) {
-                    //TODO modificar la db para que acepte cantidades
                     // Si el producto ya está en el carrito, actualizar la cantidad
-                    $consulta = "UPDATE carrito SET cantidad = cantidad + 1 WHERE id_producto = ?";
+                    $consulta = "UPDATE carrito SET cantidad = cantidad + 1 WHERE id = ?";
                     $actualizar = $db->actualizarC($consulta, [$productoId]);
 
                     if ($actualizar) {
                         // Responder con éxito
                         echo json_encode(['success' => true, 'message' => 'Producto actualizado en el carrito']);
+                        header("Location: http://localhost/pethotel/controladores/procesarProductos.php");
+                        exit();
                     } else {
                         // Responder con error
                         echo json_encode(['success' => false, 'message' => 'Error al actualizar el carrito']);
+                        header("Location: http://localhost/pethotel/controladores/procesarProductos.php");
+                        exit();
                     }
                 } else {
-                    // Si el producto no está en el carrito, agregarlo
-                    $consulta = "INSERT INTO carrito (nombreProducto, imagen, precio, cantidad) VALUES ('$productoNombre', $productoImagen, $productoPrecio)";
-                    $insertar = $db->insertarC($consulta, [$productoId]);
+                    $consulta = "INSERT INTO carrito (nombreProducto, imagen, precio, cantidad) VALUES (:nombreProducto, :imagen, :precio, :cantidad)";
+                    $stmt = $db->getPdo()->prepare($consulta);
+                    $cantidad = 1;
 
-                    if ($insertar) {
+                    $stmt->bindParam(':nombreProducto', $productoNombre, PDO::PARAM_STR);
+                    $stmt->bindParam(':imagen', $productoImagen, PDO::PARAM_LOB); // Especificar como dato binario
+                    $stmt->bindParam(':precio', $productoPrecio, PDO::PARAM_STR);
+                    $stmt->bindParam(':cantidad', $cantidad, PDO::PARAM_INT);
+
+                    if ($stmt->execute()) {
                         // Responder con éxito
                         echo json_encode(['success' => true, 'message' => 'Producto añadido al carrito']);
+                        header("Location: http://localhost/pethotel/controladores/procesarProductos.php");
+                        exit();
                     } else {
                         // Responder con error
                         echo json_encode(['success' => false, 'message' => 'Error al agregar el producto al carrito']);
+                        header("Location: http://localhost/pethotel/controladores/procesarProductos.php");
+                        exit();
                     }
                 }
+            }
+        }
+
+        public function getCarrito() {
+
+            $consulta = "SELECT * FROM carrito";
+            if($this->conector->consultar($consulta)) {
+                $carritoDB = $this->conector->consultar($consulta);
+                $carrito = array();
+                foreach ($carritoDB as $item) {
+                    $id = number_format($item['id']);
+                    $imagen = base64_encode($item['imagen']);
+                    $nombre = $item['nombreProducto'];
+                    $precio = number_format($item['precio'],2,'.');
+                    $cantidad = number_format($item['cantidad']);
+
+                    // Decodificamos las imágenes
+                    array_push($carrito, new Carrito($id,$nombre, base64_decode($imagen), $precio, $cantidad));
+
+                }
+
+                return $carrito;
+
             }
 
         }

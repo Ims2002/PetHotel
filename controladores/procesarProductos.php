@@ -6,7 +6,5 @@ $manager = new Manager();
 
 $productos = $manager->getProductos();
 
-//var_dump($productos);
-
 include 'C:\xampp\htdocs\PetHotel\views\productos.php';
 

@@ -10,9 +10,7 @@
 <style>
 
     body {
-        background-image: url("../img/hierba.jpg") ;
-        background-size: cover;
-        background-repeat: no-repeat;
+
         text-align: center;
         margin: 0;
         padding: 0;
@@ -38,11 +36,13 @@
         font-family: arial, serif;
         margin-bottom: 400px;
         margin-top: 50px;
+        border: 1px solid black;
     }
 
     .card img {
         max-width: 300px;
         max-height: 300px;
+        border-radius: ;
     }
 
     .price {
@@ -65,13 +65,33 @@
     .card button:hover {
         opacity: 0.7;
     }
+
+    h1 {
+        margin: 20px;
+        height: 70px;
+        font-family: "Comic Sans MS", cursive;
+    }
+
+    h3 {
+        margin: 5px;
+        height: 50px;
+    }
+
+    #titulo {
+        margin: 0;
+        padding: 20px;
+        background: linear-gradient(saddlebrown, bisque);
+
+
+    }
+
 </style>
 
 <?php include("partials/header.php"); ?>
 <body>
 
 
-<h1>Venta de artículos caninos</h1>
+<h1 id="titulo">Venta de artículos caninos</h1>
 
 <div id="contenedorPrincipal">
 
@@ -84,8 +104,6 @@
         <?php else: ?>
             <p>No hay productos disponibles</p>
         <?php endif; ?>
-
-
 
     </div>
 

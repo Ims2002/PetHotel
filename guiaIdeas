@@ -38,6 +38,7 @@ Base de Datos:
         * nombreProducto
         * imagen
         * precio
+        * cantidad
 
     -Reservas:
         * id
@@ -48,9 +49,7 @@ Base de Datos:
         * email
         * telefono
 
-    - TODO los botones ya añaden elementos a la base de datos,
-        falta recuperar los datos del carrito y listarlos en un carrito
-        tambien queda pendiente el cálculo del precio total y el diseño del carrito,
-        además se ha de mover la funcionalidad de 'procesarCarrito.php' al Manager
-        y comprobar también si se necesita el action del FORM o no.
-
+    - TODO implementar el envio de un correo con la factura
+        al email del usuario (session) y revisar logIn y Registro
+        apañar las ofertas de la página principal (redireccion
+        a la tienda y yau).

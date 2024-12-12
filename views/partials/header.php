@@ -1,11 +1,11 @@
 <header>
     <nav class="navbar">
-        <div class="logo">Pet Hotel</div>
+        <div class="logo"><a href="http://localhost/pethotel/views/index.php">Pet Hotel</a></div>
         <ul>
-            <li><a href="http://localhost/pethotel/index.php">Inicio</a></li>
-            <li><a href="http://localhost/pethotel/carrito.php">Carrito</a></li>
-            <li><a href="http://localhost/pethotel/reservas.php">Reserva</a></li>
-            <li><a href="">Contacto</a></li>
+            <li><a href="http://localhost/pethotel/views/index.php">Inicio</a></li>
+            <li><a href="http://localhost/pethotel/controladores/procesarProductos.php">Tienda</a></li>
+            <li><a href="http://localhost/pethotel/views/reservas.php">Reserva</a></li>
+            <li><a href="http://localhost/pethotel/views/carrito.php">Carrito</a></li>
         </ul>
     </nav>
 </header>
@@ -18,15 +18,14 @@
         justify-content: space-between; /* Espacia los elementos a los lados */
         align-items: center;
         font-family: "Comic Sans MS", cursive;
-        border-radius: 15%;
     }
 
     /* Logo o título */
-    .navbar .logo {
-        color: bisque;
-        font-family: "Comic Sans MS", cursive;
-        margin-left: 5px;
+    .navbar .logo a {
+        text-decoration: none;
+        color: bisque; /* Sin estilo adicional */
         font-size: 1.5em;
+        font-family: "Comic Sans MS", cursive;
         font-weight: bold;
     }
 
@@ -43,7 +42,7 @@
         display: inline;
     }
 
-    /* Enlaces */
+    /* Enlaces del menú */
     .navbar ul li a {
         text-decoration: none;
         color: bisque; /* Blanco */
@@ -56,4 +55,3 @@
         color: #FFD700; /* Dorado al pasar el mouse */
     }
 </style>
-
