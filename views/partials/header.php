@@ -5,7 +5,8 @@
             <li><a href="http://localhost/pethotel/views/index.php">Inicio</a></li>
             <li><a href="http://localhost/pethotel/controladores/procesarProductos.php">Tienda</a></li>
             <li><a href="http://localhost/pethotel/views/reservas.php">Reserva</a></li>
-            <li><a href="http://localhost/pethotel/views/carrito.php">Carrito</a></li>
+            <li><a href="http://localhost/pethotel/controladores/procesarElementosCarrito.php">Carrito</a></li>
+            <li><a href="http://localhost/pethotel/controladores/cerrarSesion.php">Cerrar Sesión</a></li>
         </ul>
     </nav>
 </header>

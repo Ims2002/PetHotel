@@ -37,13 +37,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['email'] = $email;
                 $_SESSION['passwd'] = $passwd;
 
-                $nombre = Usuario::getNombre($email);
+                $nombre = Usuario::getNombre($email)[0];
 
                 $_SESSION['nombre'] = $nombre;
 
-                echo $_SESSION['nombre'][0];
+                //echo $_SESSION['nombre'][0];
 
-                // Redirigir al Panel de Control
+                //Redirigir al Panel de Control
                 header('Location: /pethotel/views/index.php');
                 exit;
             }

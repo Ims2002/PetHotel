@@ -2,6 +2,8 @@
 
 require_once ("C:\\xampp\htdocs\PetHotel\clases\Manager.php");
 
+session_start();
+
 $manager = new Manager();
 $passwd = isset($_POST['passwdReg']) ? $_POST['passwdReg'] : null;
 $nombre = isset($_POST['nombreReg']) ? $_POST['nombreReg'] : null;

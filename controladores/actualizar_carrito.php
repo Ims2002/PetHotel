@@ -2,6 +2,8 @@
 
 require_once "C:\\xampp\htdocs\PetHotel\clases\ConexionDB.php";
 
+session_start();
+
 $db = new ConexionDB();
 
 if($_POST['producto_id']){

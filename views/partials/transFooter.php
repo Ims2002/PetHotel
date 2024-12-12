@@ -33,7 +33,6 @@
             font-size: 14px; /* Tamaño de letra */
             color: white;
             border-top: 1px solid #ddd; /* Línea superior */
-            background: linear-gradient(bisque, saddlebrown);
 
         }
 

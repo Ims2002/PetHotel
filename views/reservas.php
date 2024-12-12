@@ -98,5 +98,5 @@
     </form>
 
 </body>
-<?php include("partials/footer.php"); ?>
+<?php include("partials/transFooter.php"); ?>
 </html>

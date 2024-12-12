@@ -20,6 +20,7 @@
             display: flex;
             flex-direction: column; /* Organización en columna */
             font-family: Arial, sans-serif; /* Fuente básica */
+
         }
 
         /* Contenido principal que expande */
@@ -32,8 +33,10 @@
             text-align: center; /* Centra el contenido */
             padding: 20px 10px; /* Espaciado interno */
             font-size: 14px; /* Tamaño de letra */
-            color: gray; /* Gris claro */
+            color: white; /* Gris claro */
             border-top: 1px solid #ddd; /* Línea superior */
+            background: linear-gradient(bisque, saddlebrown);
+
         }
 
         /* Estilo para los enlaces del menú */
@@ -53,7 +56,7 @@
 
         .footer-menu a {
             text-decoration: none; /* Elimina el subrayado */
-            color: gray; /* Gris claro */
+            color: white; /* Gris claro */
             transition: color 0.3s ease; /* Transición suave */
         }
 

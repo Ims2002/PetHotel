@@ -1,6 +1,8 @@
 <?php
-require_once ("C:\\xampp\htdocs\PetHotel\clases\ManagerForm.php");
+require_once ("C:\\xampp\htdocs\PetHotel\clases\Manager.php");
 require_once ("C:\\xampp\htdocs\PetHotel\clases\Reserva.php");
+
+session_start();
 
 $managerForm = new Manager();
 
@@ -8,3 +10,5 @@ $reserva = new Reserva($_POST['fechaEntrada'],$_POST['fechaSalida'],$_POST['raza
 
 $managerForm->procesarFormReserva($reserva);
 
+header('Location: ../vistas/index.php');
+exit();

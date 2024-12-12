@@ -16,6 +16,7 @@ class Mailer {
         try {
             $this->mail = new PHPMailer(true);
             $this->baseConfig();
+
         } catch (Exception $e) {
             echo $e->getMessage();
 
@@ -50,6 +51,47 @@ class Mailer {
             echo 'El mensaje no pudo ser enviado. Error: ' . $e->getMessage();
         }
     }
+
+    public function createPedido($factura, $who)
+    {
+        try {
+
+            // Configuración de destinatarios
+            $this->mail->setFrom('ims.php.02@gmail.com', 'Pet Hotel'); // Remitente
+            $this->mail->addAddress($factura->getEmail(), 'Cliente'); // Destinatario
+            $this->mail->addReplyTo('ims.php.02@gmail.com', 'Pet Hotel'); // Responder a
+
+            // Fecha actual
+            $fecha = date('l jS \of F Y h:i:s A');
+
+            // Contenido del email
+            $productosHTML = $factura->getProductosHTML();
+
+            $precioTotal = number_format($factura->getTotal(), 2);
+
+            $this->mail->isHTML(true);
+            $this->mail->Subject = "$who, aquí tienes tu factura de Pet Hotel!";
+            $this->mail->Body = "
+        <h2 style='font-family: Arial, sans-serif; color: #444;'>Factura de tu pedido</h2>
+        <p style='font-family: Arial, sans-serif; color: #555;'>Gracias por confiar en Pet Hotel. Aquí tienes el detalle de tu pedido:</p>
+        <div style='margin-bottom: 20px;'>
+            <h3 style='color: #444;'>Resumen del pedido:</h3>
+            $productosHTML
+        </div>
+        <div style='margin-top: 20px; padding: 15px; border-top: 2px solid #444; font-family: Arial, sans-serif;'>
+            <p style='font-size: 18px; color: #444;'><strong>Total a pagar:</strong> $precioTotal €</p>
+        </div>
+        <p style='font-family: Arial, sans-serif; color: #777;'>Creado por: $who</p>";
+
+            $this->mail->AltBody = "Factura generada el $fecha.\nTotal: $precioTotal €.\nCreado por: $who.";
+
+            // Enviar email
+            $this->mail->send();
+        } catch (Exception $e) {
+            echo 'El mensaje no pudo ser enviado. Error: ' . $e->getMessage();
+        }
+    }
+
 
 
 
@@ -135,6 +177,8 @@ class Mailer {
             $this->mail->isSMTP();                                            // Send using SMTP
             $this->mail->Host = 'smtp.gmail.com';                       // Set the SMTP server to send through
             //$mail->Host = gethostbyname('smtp.gmail.com');            // Si hay problemas con SMTP en IPv6
+            $this->mail->CharSet = 'UTF-8';
+            $this->mail->Encoding = 'base64';
             $this->mail->SMTPAuth   = true;                                   // Enable SMTP authentication
             $this->mail->Username   = 'ims.php.02@gmail.com';          // SMTP username
             $this->mail->Password   = 'wbzv kwzn nmrn inzo';                                     // SMTP password

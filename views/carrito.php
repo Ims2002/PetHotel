@@ -167,8 +167,12 @@
         </section>
         <hr>
         <section id="bloquePago">
-            <p>Precio Total: <?php echo number_format($precioTotal,2) ?></p>
-            <button value="hacerPedido" name="hacerPedido">Hacer Pedido</button>
+            <p>Precio Total: <?php echo number_format($precioTotal, 2); ?> €</p>
+
+            <form action="../controladores/procesarPedido.php" method="POST">
+                <input type="hidden" name="hacerPedido">
+                <button type="submit">Hacer Pedido</button>
+            </form>
         </section>
     </section>
 </section>

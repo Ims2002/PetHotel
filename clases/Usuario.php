@@ -1,6 +1,7 @@
 <?php
 
 require_once ('C:\xampp\htdocs\PetHotel\clases\Manager.php');
+require_once ('C:\xampp\htdocs\PetHotel\clases\ConexionDB.php');
 
 include_once ("C:\\xampp\htdocs\PetHotel\Exceptions\MenosDe16Exception.php");
 include_once ("C:\\xampp\htdocs\PetHotel\Exceptions\MasDe6Exception.php");
@@ -15,6 +16,7 @@ class Usuario
     private static $email;
     private static $passwd;
     private static $manager;
+    private static $db;
 
 
     public static function autenticar($email, $passwd)
@@ -22,6 +24,7 @@ class Usuario
         self::$email = $email;
         self::$passwd = $passwd;
         self::$manager = new Manager();
+        self::$db = new ConexionDB();
 
         if (self::validarClave($passwd)) {
             if(self::$manager->checkLogin($email, $passwd)) {
@@ -56,7 +59,6 @@ class Usuario
 
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
-            // TODO ver como solicitar el nombre para iniciar sesión
             // $_SESSION['nombre'] = self::$nombre;
             $_SESSION['email'] = self::$email;
             $_SESSION['passwd'] = self::$passwd;
@@ -78,14 +80,21 @@ class Usuario
     }
 
     public static function cerrarSesion() {
-        self::$manager->eliminarTodo();
+        $_SESSION = array();
         session_destroy();
     }
 
     public static function getNombre($email) {
 
-        self::$nombre = self::$manager->getNombre($email);
-        return self::$nombre;
+        $consulta = "SELECT nombre from usuarios where email = ?";
+        $resultado = self::$db->consultarC($consulta,[strtolower($email)]);
+
+        $nombre = $resultado[0];
+
+        return $nombre;
+
+        /*self::$nombre = self::$manager->getNombre($email);
+        return self::$nombre;*/
 
     }
 

@@ -81,8 +81,6 @@
         margin: 0;
         padding: 20px;
         background: linear-gradient(saddlebrown, bisque);
-
-
     }
 
 </style>

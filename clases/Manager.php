@@ -15,6 +15,7 @@ require_once('C:\xampp\htdocs\PetHotel\clases\Producto.php');
 
         public function __construct()
         {
+            Usuario::iniciarSesion();
             $this->conector = new ConexionDB();
             $this->mailer = new Mailer();
         }
@@ -46,7 +47,7 @@ require_once('C:\xampp\htdocs\PetHotel\clases\Producto.php');
 
                         $this->conector->insertar($consulta);
 
-                        $this->mailer->createReserva($reserva,'Ivan');
+                        $this->mailer->createReserva($reserva,$_SESSION['nombre']);
 
                     } catch (PDOException $e) {
                         echo $e->getMessage();
@@ -204,6 +205,13 @@ require_once('C:\xampp\htdocs\PetHotel\clases\Producto.php');
                     }
                 }
             }
+        }
+
+        public function vaciarCarrito() {
+
+            $consulta = "TRUNCATE TABLE carrito";
+            $this->conector->eliminar($consulta);
+
         }
 
         public function getCarrito() {
